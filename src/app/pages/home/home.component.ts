@@ -18,13 +18,14 @@ export class HomeComponent implements OnInit {
       route:'#news'
     },
     {
-      item:'iniciar sesión',
-      route:'/auth/login'
+      item:'foro',
+      route:'/foro'
     },
     {
-      item:'registrarse',
-      route:'/auth/register'
-    },
+      item:'tienda',
+      route:'/tienda'
+    }
+
 
 
   ]

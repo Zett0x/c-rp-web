@@ -1,0 +1,12 @@
+
+#login-link{
+  margin-left: 2rem;
+  margin-right: 0.8rem;
+}
+#login-link>a:hover{
+  color: white;
+
+}
+#register-link>a:hover{
+  color:white;
+}
