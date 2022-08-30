@@ -1,0 +1,34 @@
+.form-image-bg{
+  background-image: url(../../../../assets/register-3_1920x1080.png);
+  background-size: cover;
+
+}
+.modal-form{
+  border-radius: 5px;
+  max-width: 50px;
+  min-width: 400px;
+  max-height: 500px;
+  min-height:400px;
+  background-color: black;
+  color: white;
+  opacity: .7;
+  font-size: 1.6rem;
+
+
+}
+div.form-group{
+  margin-top: 0.1em;
+  margin-bottom: 0.7em;
+}
+label{
+  margin-bottom: 0.7em;
+}
+.marg{
+  margin-top:100px;
+
+}
+span{
+  display: block;
+  margin-top:0.5rem;
+  font-size: 1rem;
+}
