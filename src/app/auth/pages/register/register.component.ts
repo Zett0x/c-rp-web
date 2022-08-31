@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { isEmailValidator } from 'src/app/validators/isEmail.validator';
+import { isValidUsernameValidator } from 'src/app/validators/isValidUsername.validator';
 
 @Component({
   selector: 'app-register',
@@ -9,28 +11,13 @@ import { FormBuilder, FormGroup} from '@angular/forms';
 export class RegisterComponent implements OnInit {
 
 
-  get emailErrorMsg():string{
-    const errors=this.myForm.get('email')?.errors;
-    if(errors?.['required']){
-      return 'Email obligatorio'
-    }
-
-    if(errors?.['pattern']){
-      return 'El email no es válido'
-    }
-    if(errors?.['emailTomado']){
-      return 'Este email ya está en uso'
-    }
-
-
-    return '';
-  }
 
   myForm:FormGroup=this.fb.group({
-    email:[''],
-    username:[''],
-    password:[''],
-    password2:['']
+    email:['',[Validators.required,isEmailValidator()]],
+    username:['',[Validators.required,Validators.minLength(8),isValidUsernameValidator()]],
+    password:['',[Validators.required,Validators.minLength(6)]],
+    confirmPassword:['',[Validators.required,Validators.minLength(6)]],
+    terms:[false,[Validators.requiredTrue]]
   });
 
 
@@ -40,11 +27,27 @@ export class RegisterComponent implements OnInit {
   }
 
   submitForm(){
+    console.log(this.myForm.controls);
+    console.log(this.myForm);
 
   }
 
-  checkFieldErrors(field:string){
+  checkFieldErrors(field:string):boolean{
+      return this.myForm.controls[field].errors && this.myForm.controls[field].touched || false;
 
+  }
+
+  get emailErrorMsg():string{
+    const errors=this.myForm.get('email')?.errors;
+    if(errors?.['required']){
+      return 'El campo email es obligatorio'
+    }
+
+    if(errors?.['ErrorMsg'])
+    return errors?.['ErrorMsg'];
+
+
+    return '';
   }
 
 }
