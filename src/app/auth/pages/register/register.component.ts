@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { isEmailValidator } from 'src/app/validators/isEmail.validator';
 import { isValidUsernameValidator } from 'src/app/validators/isValidUsername.validator';
+import { mustMatch } from 'src/app/validators/mustMatch.validator';
 import { containsSpecialCaracterValidator } from 'src/app/validators/specialCaracter.validator';
 import { strongPasswordValidator } from 'src/app/validators/strongPassword.validator';
 
@@ -12,7 +13,7 @@ import { strongPasswordValidator } from 'src/app/validators/strongPassword.valid
 })
 export class RegisterComponent implements OnInit {
 
-
+  /* showTermsError:boolean=false; */
 
   myForm:FormGroup=this.fb.group({
     email:['',[Validators.required,isEmailValidator()]],
@@ -20,6 +21,8 @@ export class RegisterComponent implements OnInit {
     password:['',[Validators.required,Validators.minLength(6),containsSpecialCaracterValidator(),strongPasswordValidator()]],
     confirmPassword:['',[Validators.required,Validators.minLength(6)]],
     terms:[false,[Validators.requiredTrue]]
+  },{
+    validators:[mustMatch('password','confirmPassword')]
   });
 
 
@@ -31,6 +34,9 @@ export class RegisterComponent implements OnInit {
   submitForm(){
     console.log(this.myForm.controls);
     console.log(this.myForm);
+    /* if(this.myForm.controls['terms'].errors){
+      this.showTermsError=true;
+    }else this.showTermsError=false; */
 
   }
 
@@ -74,6 +80,20 @@ export class RegisterComponent implements OnInit {
     }
     if(errors?.['minlength'])
     return 'La contraseña debe de tener mínimo 6 caracteres';
+
+    if(errors?.['ErrorMsg'])
+    return errors?.['ErrorMsg'];
+
+
+    return '';
+
+  }
+
+  get confirmPasswordErrorMsg():string{
+    const errors=this.myForm.get('confirmPassword')?.errors;
+    if(errors?.['required']){
+      return 'El campo es obligatorio'
+    }
 
     if(errors?.['ErrorMsg'])
     return errors?.['ErrorMsg'];
