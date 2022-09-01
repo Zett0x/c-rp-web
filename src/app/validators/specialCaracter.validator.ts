@@ -7,7 +7,7 @@ export function containsSpecialCaracterValidator():ValidatorFn{
     if(!value){
       return null;
     }
-    const fieldValid=/^[a-zA-Z0-9.@_-]*$/.test(value);
+    const fieldValid=/^[a-zA-Z0-9.$@_-]*$/.test(value);
 
     return !fieldValid?{ErrorMsg:'El campo no puede contener caracteres especiales: "<>\'\""'}:null;
 
