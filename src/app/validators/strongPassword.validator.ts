@@ -13,7 +13,7 @@ export function strongPasswordValidator():ValidatorFn{
     const hasAtLeastOneLowercaseLetter=/(?=.*[a-z])/.test(value);
     const hasAtLeastOneDigit=/(?=.*[0-9])/.test(value);
 
-    if(!hasAtLeastOneUppercaseLetter){
+   /*  if(!hasAtLeastOneUppercaseLetter){
       return {ErrorMsg:'La contraseña debe de tener al menos una letra mayúscula'}
     }
     if(!hasAtLeastOneLowercaseLetter){
@@ -21,9 +21,9 @@ export function strongPasswordValidator():ValidatorFn{
     }
     if(!hasAtLeastOneDigit){
       return {ErrorMsg:'La contraseña debe de tener al menos un dígito/número'}
-    }
+    } */
+    return !hasAtLeastOneUppercaseLetter || !hasAtLeastOneLowercaseLetter || !hasAtLeastOneDigit ? {ErrorMsg:'La contraseña debe de estar formada por maýusculas, minúsculas y números'} : null;
 
-    return null;
 
   }
 }
