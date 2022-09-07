@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { UserService } from 'src/app/user/services/user.service';
 import { isEmailValidator } from 'src/app/validators/isEmail.validator';
 import { isValidUsernameValidator } from 'src/app/validators/isValidUsername.validator';
 import { mustMatch } from 'src/app/validators/mustMatch.validator';
 import { containsSpecialCaracterValidator } from 'src/app/validators/specialCaracter.validator';
 import { strongPasswordValidator } from 'src/app/validators/strongPassword.validator';
-import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-register',
@@ -27,7 +28,7 @@ export class RegisterComponent implements OnInit {
   });
 
 
-  constructor(private fb:FormBuilder, private authService:AuthService) { }
+  constructor(private fb:FormBuilder, private userService:UserService) { }
 
   ngOnInit(): void {
   }
@@ -47,7 +48,7 @@ export class RegisterComponent implements OnInit {
     const password=this.myForm.controls['password'].value;
     const confirmPassword=this.myForm.controls['confirmPassword'].value;
 
-    this.authService.addUser({email,username,password,confirmPassword})
+    this.userService.addUser({email,username,password,confirmPassword})
     .subscribe(data=>{
       console.log(data);
     })
