@@ -65,6 +65,8 @@ export class RegisterComponent implements OnInit {
     if(errors?.['required']){
       return 'El campo "nombre de usuario" es obligatorio'
     }
+    if(errors?.['minlength'])
+    return 'El campo debe tener mínimo 8 caracteres';
     if(errors?.['ErrorMsg'])
     return errors?.['ErrorMsg'];
 
