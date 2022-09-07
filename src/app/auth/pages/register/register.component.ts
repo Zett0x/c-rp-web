@@ -33,10 +33,8 @@ export class RegisterComponent implements OnInit {
 
   submitForm(){
     console.log(this.myForm.controls);
-    console.log(this.myForm);
-    /* if(this.myForm.controls['terms'].errors){
-      this.showTermsError=true;
-    }else this.showTermsError=false; */
+    this.myForm.reset();
+    //console.log(this.myForm);
 
   }
 
