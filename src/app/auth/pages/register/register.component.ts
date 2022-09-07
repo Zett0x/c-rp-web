@@ -5,6 +5,7 @@ import { isValidUsernameValidator } from 'src/app/validators/isValidUsername.val
 import { mustMatch } from 'src/app/validators/mustMatch.validator';
 import { containsSpecialCaracterValidator } from 'src/app/validators/specialCaracter.validator';
 import { strongPasswordValidator } from 'src/app/validators/strongPassword.validator';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -26,16 +27,30 @@ export class RegisterComponent implements OnInit {
   });
 
 
-  constructor(private fb:FormBuilder) { }
+  constructor(private fb:FormBuilder, private authService:AuthService) { }
 
   ngOnInit(): void {
   }
 
   submitForm(){
-    console.log(this.myForm.controls);
-    this.myForm.reset();
-    //console.log(this.myForm);
 
+
+    //this.myForm.reset();
+    //console.log(this.myForm);
+    this.addUser();
+
+  }
+
+  private addUser(){
+    const email=this.myForm.controls['email'].value;
+    const username=this.myForm.controls['username'].value;
+    const password=this.myForm.controls['password'].value;
+    const confirmPassword=this.myForm.controls['confirmPassword'].value;
+
+    this.authService.addUser({email,username,password,confirmPassword})
+    .subscribe(data=>{
+      console.log(data);
+    })
   }
 
   checkFieldErrors(field:string):boolean{
