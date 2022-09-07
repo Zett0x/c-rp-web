@@ -51,6 +51,7 @@ export class RegisterComponent implements OnInit {
     this.userService.addUser({email,username,password,confirmPassword})
     .subscribe(data=>{
       console.log(data);
+      this.myForm.reset();
     })
   }
 
