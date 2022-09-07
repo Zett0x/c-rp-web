@@ -1,0 +1,26 @@
+<nav class="navbar fixed-top navbar-expand-lg bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="#">{{navBrand}}</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item" *ngFor="let item of navItems;let i=index;">
+          <a class="nav-link" routerLink={{item.route}} aria-current="page" href="#">{{item.item}}</a>
+        </li>
+
+          <li class="nav-item" id="login-link">
+            <a class="nav-link btn btn-outline-success btn-sm" routerLink='/auth/login' aria-current="page" href="#">Iniciar sesión</a>
+          </li>
+          <li class="nav-item" id="register-link">
+            <a class="nav-link btn btn-outline-primary btn-sm" routerLink='/auth/register' aria-current="page" href="#">Crear cuenta</a>
+          </li>
+
+
+
+
+      </ul>
+    </div>
+  </div>
+</nav>

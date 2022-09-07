@@ -1,1 +1,70 @@
-<p>register works!</p>
+<!-- <div class="container-fluid vh-100 d-flex justify-content-center align-items-center"> -->
+
+  <div class="container-fluid vh-100 d-flex flex-column justify-content-center align-items-center form-image-bg">
+
+    <div class="container d-flex justify-content-center mb-5">
+      <img class="img-fluid" src="../../../../assets/register-text.png" alt="Registro usuario">
+    </div>
+
+
+    <div class="container modal-form d-flex justify-content-center align-items-center">
+
+
+
+      <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Dirección de correo:</label>
+            <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Introduzca dirección de correo">
+            <span class="text-danger" *ngIf="checkFieldErrors('email')">{{emailErrorMsg}}</span>
+
+          </div>
+          <div class="form-group">
+            <label for="exampleInputUsername">Nombre del personaje</label>
+            <input formControlName="username" type="text" class="form-control" id="exampleInputUsername" aria-describedby="emailHelp" placeholder="Introduce nombre de usuario">
+            <span class="text-danger" *ngIf="checkFieldErrors('username')">{{usernameErrorMsg}}</span>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Contraseña</label>
+            <input formControlName="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Introduzca contraseña...">
+            <span class="text-danger" *ngIf="checkFieldErrors('password')">{{passwordErrorMsg}}</span>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputPassword2">Repita contraseña</label>
+            <input formControlName="confirmPassword" type="password" class="form-control" id="exampleInputPassword2" placeholder="Confirme contraseña...">
+            <span class="text-danger" *ngIf="checkFieldErrors('confirmPassword')">{{confirmPasswordErrorMsg}}</span>
+          </div>
+          <div class="form-check">
+            <input formControlName="terms" type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Acepto los <a href="#">Términos y condiciones de uso</a></label>
+          </div>
+         <button [disabled]="this.myForm.invalid" type="submit" class="btn btn-primary">Registrarse</button>
+     <!--     <button type="submit" class="btn btn-primary">Registrarse</button> -->
+
+          <span>¿Ya tienes una cuenta? Inicie sesión <a routerLink="/auth/login">aquí</a></span>
+
+
+
+
+      </form>
+
+    </div>
+
+    <div class="container">{{myForm.valid}}</div>
+
+
+
+
+</div>
+
+<!-- </div> -->
+
+
+
+
+
+
+
+
