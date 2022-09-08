@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { map, tap } from 'rxjs';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { UserService } from 'src/app/user/services/user.service';
 import { emailAvailableValidator } from 'src/app/validators/email_async.validator';
 import { isEmailValidator } from 'src/app/validators/isEmail.validator';
