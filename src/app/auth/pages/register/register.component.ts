@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { map, tap } from 'rxjs';
 import { UserService } from 'src/app/user/services/user.service';
 import { isEmailValidator } from 'src/app/validators/isEmail.validator';
 import { isValidUsernameValidator } from 'src/app/validators/isValidUsername.validator';
 import { mustMatch } from 'src/app/validators/mustMatch.validator';
 import { containsSpecialCaracterValidator } from 'src/app/validators/specialCaracter.validator';
 import { strongPasswordValidator } from 'src/app/validators/strongPassword.validator';
+import { usernameAvailableValidator } from 'src/app/validators/username_async.validator';
 
 
 @Component({
@@ -19,7 +21,12 @@ export class RegisterComponent implements OnInit {
 
   myForm:FormGroup=this.fb.group({
     email:['',[Validators.required,isEmailValidator()]],
-    username:['',[Validators.required,Validators.minLength(8),isValidUsernameValidator()]],
+    username:['',{
+      validators:[Validators.required,Validators.minLength(8),isValidUsernameValidator()],
+      asyncValidators:[usernameAvailableValidator(this.userService)],
+      updateOn:'blur' //or change or submit
+
+    }],
     password:['',[Validators.required,Validators.minLength(6),containsSpecialCaracterValidator(),strongPasswordValidator()]],
     confirmPassword:['',[Validators.required,Validators.minLength(6)]],
     terms:[false,[Validators.requiredTrue]]
@@ -59,6 +66,12 @@ export class RegisterComponent implements OnInit {
       return this.myForm.controls[field].errors && this.myForm.controls[field].touched || false;
 
   }
+
+
+
+
+
+
 
   //GETTERS FIELDS ERRORS MSG
 
