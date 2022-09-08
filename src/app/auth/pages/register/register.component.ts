@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { map, tap } from 'rxjs';
 import { UserService } from 'src/app/user/services/user.service';
+import { emailAvailableValidator } from 'src/app/validators/email_async.validator';
 import { isEmailValidator } from 'src/app/validators/isEmail.validator';
 import { isValidUsernameValidator } from 'src/app/validators/isValidUsername.validator';
 import { mustMatch } from 'src/app/validators/mustMatch.validator';
@@ -20,7 +21,14 @@ export class RegisterComponent implements OnInit {
   /* showTermsError:boolean=false; */
 
   myForm:FormGroup=this.fb.group({
-    email:['',[Validators.required,isEmailValidator()]],
+
+    email:['',{
+      validators: [Validators.required,isEmailValidator()],
+      asyncValidators:[emailAvailableValidator(this.userService)],
+      updateOn:'blur'
+    }
+    ],
+
     username:['',{
       validators:[Validators.required,Validators.minLength(8),isValidUsernameValidator()],
       asyncValidators:[usernameAvailableValidator(this.userService)],
